@@ -4,6 +4,7 @@ import { setValue, setXAxisValue, setYAxisValue } from '../utils';
 import { Colors } from '../constants/colors';
 import FText, { FontSizes, FontWeights } from './FText';
 import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { COLORS } from '../constants/theme';
 
 const FInput = React.forwardRef(
   ({ title, icon, placeholder, isPassword, containerStyle, inputStyle, inputContainerStyle, titleProps = {}, ...restProps }, inputRef) => {
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   inputContainerBase: {
     height: setYAxisValue(65),
     borderRadius: setValue(10),
-    borderColor: Colors.border,
+    borderColor: COLORS.primary,
     borderWidth: 1,
     flexDirection: 'row'
   },
