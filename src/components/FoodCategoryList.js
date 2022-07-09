@@ -3,19 +3,21 @@ import React from 'react';
 import { FoodCategories } from '../constants/data';
 import { isAndroid, setValue, setXAxisValue, setYAxisValue } from '../utils';
 import { Colors } from '../constants/colors';
+import { COLORS } from '../constants/theme';
+
 import FText from './FText';
 import { useNavigation } from '@react-navigation/native';
 
 const FoodCategoryList = () => {
   const navigation = useNavigation();
   const renderFoodCategoryItem = React.useCallback(({ item, index }) => {
-    const onPress = () => {
-      navigation.navigate('CategoryDetail', {
-        categoryId: item.id
-      });
-    };
+    // const onPress = () => {
+    //   navigation.navigate('CategoryDetail', {
+    //     categoryId: item.id
+    //   });
+    // };
     return (
-      <TouchableOpacity onPress={onPress} style={styles.foodCategoryItem}>
+      <TouchableOpacity  style={styles.foodCategoryItem}>
         <View style={styles.foodCategoryItemIcon}>
           <Image style={styles.categoryImage} source={item.image} />
         </View>
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     width: setValue(50)
   },
   foodCategoryItem: {
-    backgroundColor: Colors.primary,
+    backgroundColor: COLORS.primary,
     marginRight: setXAxisValue(20),
     padding: setValue(4),
     borderRadius: 999,

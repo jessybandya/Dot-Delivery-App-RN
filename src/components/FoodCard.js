@@ -3,12 +3,15 @@ import React, { useRef } from 'react';
 import { Image, Pressable, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { HeartSvg, StarSvg } from '../assets/svg';
 import { Colors } from '../constants/colors';
+import { COLORS } from '../constants/theme';
 import { setValue, setXAxisValue, setYAxisValue, toCorrectImageUri } from '../utils';
 import FText from './FText';
 import Padding from './Padding';
 const FoodCard = ({ item = data, containerStyle, bannerStyle, onPress }) => {
   const imageRef = useRef();
+  
   const onCardPress = React.useCallback(() => {
+    console.log("Itesss: ",item)
     imageRef.current?.measure((x, y, width, height, pageX, pageY) => {
       onPress &&
         onPress(item, {
@@ -21,7 +24,7 @@ const FoodCard = ({ item = data, containerStyle, bannerStyle, onPress }) => {
   }, []);
   return (
     <Pressable onPress={onCardPress} style={[styles.container, containerStyle]}>
-      <Image ref={imageRef} style={[styles.banner, bannerStyle]} source={{ uri: toCorrectImageUri(item.image) }} />
+      <Image ref={imageRef} style={[styles.banner, bannerStyle]} source={{ uri: item.image }} />
       <View style={styles.headerInfo}>
         <View style={styles.priceInfo}>
           <FText fontSize={15} lineHeight={15}>
@@ -34,21 +37,17 @@ const FoodCard = ({ item = data, containerStyle, bannerStyle, onPress }) => {
         <Observer>
           {() => {
             const isFav = item.favorite;
-            const onPress = () => {
-              "jessy".toggleFavoriteProduct({
-                productId: item.id
-              });
-            };
+
             return (
               <TouchableOpacity
                 onPress={onPress}
                 style={[
                   styles.btnFav,
                   isFav && {
-                    backgroundColor: Colors.primary
+                    backgroundColor: COLORS.primary
                   }
                 ]}>
-                <HeartSvg color={Colors.white} size={15} />
+                <HeartSvg color={COLORS.white} size={15} />
               </TouchableOpacity>
             );
           }}

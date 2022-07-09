@@ -1,8 +1,13 @@
+import { PortalProvider } from "@gorhom/portal";
+import { NavigationContainer } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View, Text, Image, StatusBar } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { COLORS, SIZES } from './src/constants/theme';
 import Router from "./src/Router";
+import Loading from "./src/screens/Loading";
+import { rootStore, StoreProvider } from "./src/stores";
 
 const slides = [
   {
@@ -27,9 +32,18 @@ const slides = [
 
 export default function App() {
   const [showHomePage, setShowHomePage] = useState(true);
-
-  StatusBar.setBarStyle('light-content', true);
-  StatusBar.setBackgroundColor(COLORS.primary);
+  const [dataLoaded, setDataLoaded] = React.useState(false);
+  React.useEffect(() => {
+    const rehydrate = async () => {
+      await trunk.init();
+      setTimeout(() => {
+        setDataLoaded(true);
+      }, 1000);
+    };
+    rehydrate();
+  }, []);
+  // StatusBar.setBarStyle('light-content', true);
+  // StatusBar.setBackgroundColor(COLORS.primary);
 
   const buttonLabel = (label) => {
     return(
@@ -100,6 +114,11 @@ export default function App() {
   }
 
   return(
- <Router />
+  //   <SafeAreaProvider>
+  //   <StoreProvider value={rootStore}>
+  //     <PortalProvider>{dataLoaded ?  <Loading />  : <Router />}</PortalProvider>
+  //   </StoreProvider>
+  // </SafeAreaProvider>
+  <Router />
   )
 }

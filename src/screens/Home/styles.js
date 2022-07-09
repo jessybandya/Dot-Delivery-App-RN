@@ -9,13 +9,13 @@ const styles = StyleSheet.create({
     },
     searchBox: {
         flexDirection: 'row',
-        width: SIZES.width - 20,
-        backgroundColor: COLORS.white,
-        padding: 10,
+        width: SIZES.width - 60,
+        backgroundColor: COLORS.lightGrey,
+        padding: 8,
         borderRadius: 5,
     },
     search: {
-        marginLeft: 10,
+        marginLeft: 0,
         color: COLORS.title,
     }
 });
